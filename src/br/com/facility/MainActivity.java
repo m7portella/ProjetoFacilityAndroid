@@ -16,6 +16,8 @@ import com.google.gson.Gson;
 
 public class MainActivity extends ActionBarActivity {
 	
+	public static String URL_BASE = "http://192.168.43.136:8080/ProjetoFacility/rest/";
+	//public static String URL_BASE = "http://192.168.1.2:8080/ProjetoFacility/rest/";
 	Usuario u;
 
     @Override
@@ -27,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
     public void buscar(View v){
     	EditText txtId = (EditText)findViewById(R.id.txtId);
     	int id = Integer.parseInt(txtId.getText().toString());
-    	String url = "http://192.168.43.136:8080/ProjetoFacility/rest/usuario/buscar/";
+    	String url = URL_BASE+"usuario/buscar/";
     	AQuery aq = new AQuery(this);
     	aq.ajax(url+id, String.class, new AjaxCallback<String>(){
     		public void callback(String url, String object, com.androidquery.callback.AjaxStatus status) {
