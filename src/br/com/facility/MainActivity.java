@@ -16,8 +16,8 @@ import com.google.gson.Gson;
 
 public class MainActivity extends ActionBarActivity {
 	
-	public static String URL_BASE = "http://192.168.43.136:8080/ProjetoFacility/rest/";
-	//public static String URL_BASE = "http://192.168.1.2:8080/ProjetoFacility/rest/";
+	//public static String URL_BASE = "http://192.168.43.136:8080/ProjetoFacility/rest/";
+	public static String URL_BASE = "http://192.168.1.2:8080/ProjetoFacility/rest/";
 	Usuario u;
 
     @Override
