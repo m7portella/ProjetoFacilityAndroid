@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import br.com.facility.config.Security_Util;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
@@ -26,6 +27,12 @@ public class LoginActivity extends ActionBarActivity {
 		EditText txtSenha = (EditText) findViewById(R.id.txtSenha);
 		String login = txtLogin.getText().toString();
 		String senha = txtSenha.getText().toString();
+		try {
+			login = Security_Util.encrypt(txtLogin.getText().toString());
+			senha = Security_Util.encrypt(txtSenha.getText().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		AQuery aq = new AQuery(this);
 		aq.ajax(MainActivity.URL_BASE+"usuario/login/"+login+"/"+senha, String.class, new AjaxCallback<String>(){
 			@Override
