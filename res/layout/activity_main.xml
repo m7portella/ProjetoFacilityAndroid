@@ -12,27 +12,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-
-    <EditText
-        android:id="@+id/txtId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="Id do Usuário"
-         >
-        <requestFocus />
-    </EditText>
+        android:text="Lista de Negociações" />
     
-     <Button
-        android:text="Buscar"
-        android:onClick="buscar"
+    <ListView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-     
-     <TextView
-        android:id="@+id/txtUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/lstNegociacao" />
 
 </LinearLayout>

@@ -3,13 +3,14 @@ package br.com.facility;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 import br.com.facility.to.Usuario;
 
 import com.androidquery.AQuery;
@@ -43,11 +44,15 @@ public class UsuarioCadastro extends ActionBarActivity {
 			@Override
 			public void callback(String url, String object, AjaxStatus status) {
 				if(object != null){
-					TextView txtMsg = (TextView) findViewById(R.id.txtMsg);
-					txtMsg.setText("Usuário cadastrado!");
+					Intent intent=  new Intent(UsuarioCadastro.this, MainActivity.class);
+					startActivity(intent);
+					Toast.makeText(UsuarioCadastro.this, "Logado!!", 8000).show();
+					//TextView txtMsg = (TextView) findViewById(R.id.txtMsg);
+					//txtMsg.setText("Usuário cadastrado!");
 				}else{
-					TextView txtMsg = (TextView) findViewById(R.id.txtMsg);
-					txtMsg.setText("Erro ao cadastrar!");
+					Toast.makeText(UsuarioCadastro.this, "Erro ao cadastrar!", 8000).show();
+					//TextView txtMsg = (TextView) findViewById(R.id.txtMsg);
+					//txtMsg.setText("Erro ao cadastrar!");
 				}
 			}
 		};

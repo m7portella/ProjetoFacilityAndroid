@@ -15,8 +15,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
+import android.util.Base64;
 
 /**
  * classe responsavel pela criptografia e descriptografia
@@ -45,7 +44,7 @@ public class Security_Util {
 	 * @throws IllegalBlockSizeException
 	 * @throws BadPaddingException
 	 */
-    public synchronized static byte[] decrypt(byte[] cipherText, byte[] key, byte [] initialVector) 
+    public  static byte[] decrypt(byte[] cipherText, byte[] key, byte [] initialVector) 
     		throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
     		InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException
     {
@@ -70,7 +69,7 @@ public class Security_Util {
      * @throws IllegalBlockSizeException
      * @throws BadPaddingException
      */
-    public synchronized static byte[] encrypt(byte[] plainText, byte[] key, byte [] initialVector) 
+    public static byte[] encrypt(byte[] plainText, byte[] key, byte [] initialVector) 
     		throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, 
     		InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException
     {
@@ -82,7 +81,6 @@ public class Security_Util {
         return plainText;
     }
   
-    
     /**
      * Para enviar via HTTP é necessário transformar o texto criptografado em Base 64,
      *  senão ocorre uma perda no caminho.O inverso também é verdadeiro para decriptografar
@@ -100,11 +98,10 @@ public class Security_Util {
      * @throws BadPaddingException
      * @throws IOException
      */
-    public synchronized static String decrypt(String encryptedText) 
+    public static String decrypt(String encryptedText) 
     		throws KeyException, GeneralSecurityException, GeneralSecurityException, 
     		InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException, IOException{
-        
-    	byte[] cipheredBytes = new BASE64Decoder().decodeBuffer(encryptedText);
+        byte[] cipheredBytes = Base64.decode(encryptedText.getBytes(ISO_8859_1), Base64.DEFAULT);
         byte[] keyBytes = getKeyBytes();
         return new String(decrypt(cipheredBytes, keyBytes, keyBytes), ISO_8859_1);
     }
@@ -120,17 +117,18 @@ public class Security_Util {
      * @throws IllegalBlockSizeException
      * @throws BadPaddingException
      */
-    public synchronized static String encrypt(String plainText) throws UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException{
+    public static String encrypt(String plainText) throws UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException{
         byte[] plainTextbytes = plainText.getBytes(ISO_8859_1);
         byte[] keyBytes = getKeyBytes();
-        return new BASE64Encoder().encode(encrypt(plainTextbytes,keyBytes, keyBytes));
+        return Base64.encodeToString(encrypt(plainTextbytes,keyBytes, keyBytes), Base64.DEFAULT);
     }
+    
     /**
      * cria chave p/operações
      * @return
      * @throws UnsupportedEncodingException
      */
-    public  synchronized static byte[] getKeyBytes() throws UnsupportedEncodingException{
+    public  static byte[] getKeyBytes() throws UnsupportedEncodingException{
         byte[] keyBytes= new byte[16];
         byte[] parameterKeyBytes= key.getBytes(ISO_8859_1);
         System.arraycopy(parameterKeyBytes, 0, keyBytes, 0, Math.min(parameterKeyBytes.length, keyBytes.length));
