@@ -28,6 +28,7 @@ public class UsuarioCadastro extends ActionBarActivity {
 	
 	public void salvar(View v){
 		
+		//instancia Usuario
 		EditText txtUsername = (EditText) findViewById(R.id.txtUsername);
 		EditText txtEmail = (EditText) findViewById(R.id.txtEmail);
 		EditText txtSenha = (EditText) findViewById(R.id.txtSenha);
@@ -37,16 +38,24 @@ public class UsuarioCadastro extends ActionBarActivity {
 		usuario.setSenha(txtSenha.getText().toString());
 		String usuarioJSON = new Gson().toJson(usuario);
 		
+		//seta parâmetros na url POST 
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(AQuery.POST_ENTITY, usuarioJSON);
 		
+		//envia requisição para salvar Usuario
 		AjaxCallback<String> cb = new AjaxCallback<String>(){
 			@Override
 			public void callback(String url, String object, AjaxStatus status) {
+				//valida retorno da requisição
 				if(object != null){
+					//Envia para tela principal
 					Intent intent=  new Intent(UsuarioCadastro.this, MainActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					
 					startActivity(intent);
-					Toast.makeText(UsuarioCadastro.this, "Logado!!", 8000).show();
+					Toast.makeText(UsuarioCadastro.this, "Usuário cadastrado!", 8000).show();
+					finish();
 					//TextView txtMsg = (TextView) findViewById(R.id.txtMsg);
 					//txtMsg.setText("Usuário cadastrado!");
 				}else{
@@ -63,22 +72,4 @@ public class UsuarioCadastro extends ActionBarActivity {
 		aq.ajax(MainActivity.URL_BASE+"usuario/cadastrar", params, String.class, cb);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.usuario_cadastro, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
 }

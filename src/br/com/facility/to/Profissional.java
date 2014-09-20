@@ -19,11 +19,13 @@ public class Profissional implements Serializable{
 	private int id;
 	
 	private TipoPessoa tipo;
-
+	
+	private String nome;
+	
 	private ClienteFisico clienteFisico;
-
+	
 	private ClienteJuridico clienteJuridico;
-
+	
 	private StatusValidacao statusValidacao;
 	
 	private String codigoValidacao;
@@ -43,16 +45,17 @@ public class Profissional implements Serializable{
 	private double longitude;
 	
 	private List<LocalAtendimento> locaisAtendimento = new ArrayList<LocalAtendimento>();
-	
-	public Profissional(int id, TipoPessoa tipo, ClienteFisico clienteFisico,
-			ClienteJuridico clienteJuridico, StatusValidacao statusValidacao,
-			String codigoValidacao, Calendar dataCadastro, int rank,
-			StatusProfissional status, Calendar dataStatus,
-			boolean localizavel, double altitude, double longitude,
-			List<LocalAtendimento> locaisAtendimento) {
+
+	public Profissional(int id, TipoPessoa tipo, String nome,
+			ClienteFisico clienteFisico, ClienteJuridico clienteJuridico,
+			StatusValidacao statusValidacao, String codigoValidacao,
+			Calendar dataCadastro, int rank, StatusProfissional status,
+			Calendar dataStatus, boolean localizavel, double altitude,
+			double longitude, List<LocalAtendimento> locaisAtendimento) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
+		this.nome = nome;
 		this.clienteFisico = clienteFisico;
 		this.clienteJuridico = clienteJuridico;
 		this.statusValidacao = statusValidacao;
@@ -181,6 +184,14 @@ public class Profissional implements Serializable{
 
 	public void setLocaisAtendimento(List<LocalAtendimento> locaisAtendimento) {
 		this.locaisAtendimento = locaisAtendimento;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	
 }

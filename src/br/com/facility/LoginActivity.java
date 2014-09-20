@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -22,9 +24,32 @@ import com.google.gson.Gson;
 
 public class LoginActivity extends ActionBarActivity {
 
+	private SharedPreferences pref;
+	private Editor editor;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		SharedPreferences pref = getApplicationContext().getSharedPreferences("FacilityPref", 0);
+		editor = pref.edit();
+		String user = pref.getString("user", null);
+		
+		if (user == null) {
+			setContentView(R.layout.activity_login);
+		}else{
+			//envia para página principal
+			Intent intent=  new Intent(LoginActivity.this, MainActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			
+			Usuario u = new Gson().fromJson(user, Usuario.class);
+			intent.putExtra("id", u.getId());
+			
+			startActivity(intent);
+			finish();
+		}
+		
 		setContentView(R.layout.activity_login);
 		
 		TextView lnkCadastrar = (TextView) findViewById(R.id.lnkCadastrar);
@@ -32,7 +57,19 @@ public class LoginActivity extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
+				// envia para página de cadastro
 				Intent i = new Intent(LoginActivity.this,UsuarioCadastro.class);
+				startActivity(i);
+			}
+		});
+		
+		TextView lnkPular = (TextView) findViewById(R.id.lnkPular);
+		lnkPular.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// envia para página principal
+				Intent i = new Intent(LoginActivity.this,MainActivity.class);
 				startActivity(i);
 			}
 		});
@@ -69,12 +106,20 @@ public class LoginActivity extends ActionBarActivity {
 			public void callback(String url, String object, AjaxStatus status) {
 				//valida retorno
 				if(object != null){
+					//envia para página principal
 					Intent intent=  new Intent(LoginActivity.this, MainActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					
 					Usuario u = new Gson().fromJson(object, Usuario.class);
 					intent.putExtra("id", u.getId());
+					
+					editor.putString("user", object);
+					editor.commit();
+					
 					startActivity(intent);
 					Toast.makeText(LoginActivity.this, "Logado!!", 8000).show();
+					finish();
 				}else{
 					Toast.makeText(LoginActivity.this, "Usuário ou senha inválidos!!", 8000).show();
 				}
@@ -94,22 +139,4 @@ public class LoginActivity extends ActionBarActivity {
 		startActivity(i);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.login, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
 }

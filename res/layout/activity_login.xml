@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="br.com.facility.LoginActivity" >
+    tools:context="br.com.facility.LoginActivity"
+    android:gravity="center_horizontal" >
 
     <EditText
         android:id="@+id/txtLogin"
@@ -37,9 +38,16 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/lnkCadastrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lnkCadastrar"
         android:text="Registre-se" />
+    
+    <TextView
+        android:layout_marginTop="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lnkPular"
+        android:text="Pular" />
 
 </LinearLayout>

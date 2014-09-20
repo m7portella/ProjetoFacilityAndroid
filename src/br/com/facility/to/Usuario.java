@@ -18,6 +18,8 @@ public class Usuario implements Serializable{
 	
 	private String username;
 	
+	private String nome;
+	
 	private String senha;
 	
 	private String email;
@@ -25,7 +27,7 @@ public class Usuario implements Serializable{
 	private TipoUsuario tipo;
 	
 	private TipoPessoa tipoPessoa;
-
+	
 	private Calendar dataCadastro;
 	
 	private String tokenApi;
@@ -38,12 +40,14 @@ public class Usuario implements Serializable{
 		super();
 	}
 
-	public Usuario(int id, String username, String senha, String email,
-			TipoUsuario tipo, TipoPessoa tipoPessoa, Calendar dataCadastro,
-			String tokenApi, StatusUsuario status, Calendar dataStatus) {
+	public Usuario(int id, String username, String nome, String senha,
+			String email, TipoUsuario tipo, TipoPessoa tipoPessoa,
+			Calendar dataCadastro, String tokenApi, StatusUsuario status,
+			Calendar dataStatus) {
 		super();
 		this.id = id;
 		this.username = username;
+		this.setNome(nome);
 		this.senha = senha;
 		this.email = email;
 		this.tipo = tipo;
@@ -53,6 +57,7 @@ public class Usuario implements Serializable{
 		this.status = status;
 		this.dataStatus = dataStatus;
 	}
+
 
 	public int getId() {
 		return id;
@@ -132,6 +137,14 @@ public class Usuario implements Serializable{
 
 	public void setDataStatus(Calendar dataStatus) {
 		this.dataStatus = dataStatus;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	
 }
