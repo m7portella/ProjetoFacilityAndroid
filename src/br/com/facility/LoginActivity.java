@@ -8,8 +8,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -118,10 +116,10 @@ public class LoginActivity extends ActionBarActivity {
 					editor.commit();
 					
 					startActivity(intent);
-					Toast.makeText(LoginActivity.this, "Logado!!", 8000).show();
+					//Toast.makeText(LoginActivity.this, "Logado!!", 8000).show();
 					finish();
 				}else{
-					Toast.makeText(LoginActivity.this, "Usuário ou senha inválidos!!", 8000).show();
+					Toast.makeText(LoginActivity.this, "Usuário ou senha inválidos!!", Toast.LENGTH_SHORT).show();
 				}
 			}
 		};

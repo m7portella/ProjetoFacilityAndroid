@@ -21,50 +21,27 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import br.com.facility.to.Negociacao;
 
+public class AtividadeActivity extends ActionBarActivity implements ActionBar.TabListener{
 
-public class MainActivity extends ActionBarActivity implements ActionBar.TabListener{
-	
-	//note indra 4g
-	//public static String URL_BASE = "http://192.168.43.42:8080/ProjetoFacility/rest/";
-	
-	//note indra em casa
-	public static String URL_BASE = "http://192.168.1.10:8080/ProjetoFacility/rest/";
-	
-	//mac 4g
-	//public static String URL_BASE = "http://192.168.43.136:8080/ProjetoFacility/rest/";
-	
-	//mac em casa
-	//public static String URL_BASE = "http://192.168.1.2:8080/ProjetoFacility/rest/";
-	
 	ListView lstNegociacao;
 	List<Negociacao> lista = new ArrayList<Negociacao>();
 	TabAdapter tabAdapter;
 	ViewPager viewPager;
+	AtividadeListFragment atvFragment;
+	String titulo;
 
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        //final ActionBar actionBar = getSupportActionBar();
-        //actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        Bundle bundle = getIntent().getExtras();
+        titulo = bundle.getString("titulo");
         
         tabAdapter = new TabAdapter(getSupportFragmentManager());
         
         viewPager = (ViewPager) findViewById(R.id.viewPagerMain);
         viewPager.setAdapter(tabAdapter);
-        
-        //seta uma tab para cada seção
-        /*for (int i = 0; i < tabAdapter.getCount(); i++) {
-			actionBar.addTab(actionBar.newTab().setText(tabAdapter.getPageTitle(i)).setTabListener(this));
-		}
-        
-        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
-        	@Override
-        	public void onPageSelected(int position) {
-        		actionBar.setSelectedNavigationItem(position);
-        	}
-        });*/
        
     }
     
@@ -111,9 +88,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 		public Fragment getItem(int arg0) {
 			switch (arg0){
 			case 0:
-				return new ServicoListFragment();//fragment categorias newInstance
+				return new AtividadeListFragment();				
 			case 1:
-				return new NegociacaoListFragment(); //fragment negociações
+				return new NegociacaoListFragment();
 		}
 		return null;
 		}
@@ -128,7 +105,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 			Locale l = Locale.getDefault();
 			switch (position){
 				case 0:
-					return "Serviços".toUpperCase(l);
+					return titulo.toUpperCase(l);
 				case 1:
 					return "Negociações".toUpperCase(l);
 			}
@@ -149,4 +126,5 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 	@Override
 	public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
 	}
+	
 }

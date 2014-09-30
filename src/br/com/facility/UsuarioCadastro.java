@@ -6,8 +6,6 @@ import java.util.Map;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -54,14 +52,11 @@ public class UsuarioCadastro extends ActionBarActivity {
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					
 					startActivity(intent);
-					Toast.makeText(UsuarioCadastro.this, "Usuário cadastrado!", 8000).show();
+					Toast.makeText(UsuarioCadastro.this, "Usuário cadastrado!", Toast.LENGTH_SHORT).show();
 					finish();
-					//TextView txtMsg = (TextView) findViewById(R.id.txtMsg);
-					//txtMsg.setText("Usuário cadastrado!");
+					
 				}else{
-					Toast.makeText(UsuarioCadastro.this, "Erro ao cadastrar!", 8000).show();
-					//TextView txtMsg = (TextView) findViewById(R.id.txtMsg);
-					//txtMsg.setText("Erro ao cadastrar!");
+					Toast.makeText(UsuarioCadastro.this, "Erro ao cadastrar!", Toast.LENGTH_SHORT).show();
 				}
 			}
 		};

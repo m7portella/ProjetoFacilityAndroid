@@ -41,6 +41,17 @@
             <intent-filter>
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name=".AtividadeActivity"
+            android:label="Serviços" >
+            <meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value=".MainActivity" />
+            <intent-filter>
+            </intent-filter>
+        </activity>
+        
     </application>
 
 </manifest>
