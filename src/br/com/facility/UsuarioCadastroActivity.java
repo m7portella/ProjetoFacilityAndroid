@@ -16,7 +16,7 @@ import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.google.gson.Gson;
 
-public class UsuarioCadastro extends ActionBarActivity {
+public class UsuarioCadastroActivity extends ActionBarActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +47,16 @@ public class UsuarioCadastro extends ActionBarActivity {
 				//valida retorno da requisição
 				if(object != null){
 					//Envia para tela principal
-					Intent intent=  new Intent(UsuarioCadastro.this, MainActivity.class);
+					Intent intent=  new Intent(UsuarioCadastroActivity.this, MainActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					
 					startActivity(intent);
-					Toast.makeText(UsuarioCadastro.this, "Usuário cadastrado!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(UsuarioCadastroActivity.this, "Usuário cadastrado!", Toast.LENGTH_SHORT).show();
 					finish();
 					
 				}else{
-					Toast.makeText(UsuarioCadastro.this, "Erro ao cadastrar!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(UsuarioCadastroActivity.this, "Erro ao cadastrar!", Toast.LENGTH_SHORT).show();
 				}
 			}
 		};

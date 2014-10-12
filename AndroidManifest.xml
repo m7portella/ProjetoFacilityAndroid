@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,44 +14,52 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        
+        android:theme="@style/CustomActionBarTheme" >
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:name="br.com.facility.MainActivity"
+            android:label="Facility" >
             <intent-filter>
             </intent-filter>
         </activity>
-        
         <activity
-            android:name=".LoginActivity"
+            android:name="br.com.facility.LoginActivity"
             android:label="@string/title_activity_login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
-            android:name=".UsuarioCadastro"
+            android:name="br.com.facility.UsuarioCadastroActivity"
             android:label="@string/title_activity_usuario_cadastro" >
             <meta-data
-	            android:name="android.support.PARENT_ACTIVITY"
-	            android:value=".LoginActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LoginActivity" />
+
             <intent-filter>
             </intent-filter>
         </activity>
-        
         <activity
-            android:name=".AtividadeActivity"
+            android:name="br.com.facility.EspecialidadeActivity"
             android:label="Serviços" >
-            <meta-data
-	            android:name="android.support.PARENT_ACTIVITY"
-	            android:value=".MainActivity" />
             <intent-filter>
             </intent-filter>
         </activity>
-        
+        <activity
+            android:name="br.com.facility.NegociacaoProfissionalListActivity"
+            android:label="@string/title_activity_negociacao_profissional_list" >
+        </activity>
+        <activity
+            android:name="br.com.facility.AtividadeListActivity"
+            android:label="Atividades" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+
+            <intent-filter>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

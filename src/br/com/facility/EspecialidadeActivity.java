@@ -21,13 +21,13 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import br.com.facility.to.Negociacao;
 
-public class AtividadeActivity extends ActionBarActivity implements ActionBar.TabListener{
+public class EspecialidadeActivity extends ActionBarActivity implements ActionBar.TabListener{
 
 	ListView lstNegociacao;
 	List<Negociacao> lista = new ArrayList<Negociacao>();
 	TabAdapter tabAdapter;
 	ViewPager viewPager;
-	AtividadeListFragment atvFragment;
+	EspecialidadeListFragment atvFragment;
 	String titulo;
 
 	@Override
@@ -37,6 +37,9 @@ public class AtividadeActivity extends ActionBarActivity implements ActionBar.Ta
         
         Bundle bundle = getIntent().getExtras();
         titulo = bundle.getString("titulo");
+        
+        ActionBar ab = getSupportActionBar();
+        ab.setTitle(titulo);
         
         tabAdapter = new TabAdapter(getSupportFragmentManager());
         
@@ -88,9 +91,9 @@ public class AtividadeActivity extends ActionBarActivity implements ActionBar.Ta
 		public Fragment getItem(int arg0) {
 			switch (arg0){
 			case 0:
-				return new AtividadeListFragment();				
+				return new EspecialidadeListFragment();				
 			case 1:
-				return new NegociacaoListFragment();
+				return new ProfissionalListFragment();
 		}
 		return null;
 		}
@@ -105,9 +108,9 @@ public class AtividadeActivity extends ActionBarActivity implements ActionBar.Ta
 			Locale l = Locale.getDefault();
 			switch (position){
 				case 0:
-					return titulo.toUpperCase(l);
+					return "Especialidades".toUpperCase(l);
 				case 1:
-					return "Negociações".toUpperCase(l);
+					return "Profissionais".toUpperCase(l);
 			}
 			return null;
 		}

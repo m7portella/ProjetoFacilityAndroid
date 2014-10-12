@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import br.com.facility.config.Security_Util;
+import br.com.facility.enums.TipoUsuario;
 import br.com.facility.to.Usuario;
 
 import com.androidquery.AQuery;
@@ -37,11 +38,18 @@ public class LoginActivity extends ActionBarActivity {
 			setContentView(R.layout.activity_login);
 		}else{
 			//envia para página principal
-			Intent intent=  new Intent(LoginActivity.this, MainActivity.class);
+			Intent intent;
+			Usuario u = new Gson().fromJson(user, Usuario.class);
+			if(u.getTipo()==TipoUsuario.PROFISSIONAL){
+				//envia para página de negociação do profissional
+				intent=  new Intent(LoginActivity.this, NegociacaoProfissionalListActivity.class);
+			}else{
+				//envia para página principal
+				intent=  new Intent(LoginActivity.this, MainActivity.class);
+			}
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			
-			Usuario u = new Gson().fromJson(user, Usuario.class);
 			intent.putExtra("id", u.getId());
 			
 			startActivity(intent);
@@ -56,7 +64,7 @@ public class LoginActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// envia para página de cadastro
-				Intent i = new Intent(LoginActivity.this,UsuarioCadastro.class);
+				Intent i = new Intent(LoginActivity.this,UsuarioCadastroActivity.class);
 				startActivity(i);
 			}
 		});
@@ -104,12 +112,21 @@ public class LoginActivity extends ActionBarActivity {
 			public void callback(String url, String object, AjaxStatus status) {
 				//valida retorno
 				if(object != null){
-					//envia para página principal
-					Intent intent=  new Intent(LoginActivity.this, MainActivity.class);
+					
+					
+					Usuario u = new Gson().fromJson(object, Usuario.class);
+					Intent intent;
+					if(u.getTipo()==TipoUsuario.PROFISSIONAL){
+						//envia para página de negociação do profissional
+						intent=  new Intent(LoginActivity.this, NegociacaoProfissionalListActivity.class);
+					}else{
+						//envia para página principal
+						intent=  new Intent(LoginActivity.this, MainActivity.class);
+					}
+					
 					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					
-					Usuario u = new Gson().fromJson(object, Usuario.class);
 					intent.putExtra("id", u.getId());
 					
 					editor.putString("user", object);
@@ -133,7 +150,7 @@ public class LoginActivity extends ActionBarActivity {
 	}
 	
 	public void cadastrar(View v){
-		Intent i = new Intent(this,UsuarioCadastro.class);
+		Intent i = new Intent(this,UsuarioCadastroActivity.class);
 		startActivity(i);
 	}
 

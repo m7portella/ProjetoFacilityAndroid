@@ -6,5 +6,6 @@
     <string name="action_settings">Configurações</string>
     <string name="title_activity_usuario_cadastro">Cadastre-se</string>
     <string name="title_activity_login">Facility</string>
+    <string name="title_activity_negociacao_profissional_list">Negociações</string>
 
 </resources>
