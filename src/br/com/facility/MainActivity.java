@@ -88,12 +88,14 @@ public class MainActivity extends ActionBarActivity implements
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		if (u.getTipo() == TipoUsuario.PROFISSIONAL) {
-			getMenuInflater().inflate(R.menu.main_profissional, menu);
-		} else {
-			getMenuInflater().inflate(R.menu.main, menu);
+		if (u !=null){
+			if (u.getTipo() == TipoUsuario.PROFISSIONAL) {
+				getMenuInflater().inflate(R.menu.main_profissional, menu);
+			} else {
+				getMenuInflater().inflate(R.menu.main, menu);
+			}
 		}
-
+		
 		return true;
 	}
 

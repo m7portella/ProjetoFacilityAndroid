@@ -12,11 +12,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import br.com.facility.to.Atividade;
 import br.com.facility.to.Especialidade;
 
 import com.androidquery.AQuery;
@@ -52,8 +52,19 @@ public class EspecialidadeListFragment extends Fragment {
 					//recupera lista de json
 					Especialidade[] array = new Gson().fromJson(object, Especialidade[].class);
 					especialidades = Arrays.asList(array);
-					//seta lista na tela
-					lstServicos.setAdapter(new EspecialidadeListAdapter());
+					if(especialidades.size() > 0){
+						//seta lista na tela
+						lstServicos.setAdapter(new EspecialidadeListAdapter());
+					}else{
+						List<String> list = new ArrayList<String>();
+						list.add("Nenhuma especialidade encontrada");
+						// seta lista na tela
+						ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+								getActivity(), android.R.layout.simple_list_item_1,
+								list);
+						lstServicos.setAdapter(adapter);
+					}
+					
 				}else{
 					Toast.makeText(getView().getContext(), "Erro ao buscar atividades", Toast.LENGTH_SHORT).show();
 				}

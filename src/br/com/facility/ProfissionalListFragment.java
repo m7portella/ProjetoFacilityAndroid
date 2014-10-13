@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,12 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import br.com.facility.enums.TipoPessoa;
-import br.com.facility.to.Categoria;
 import br.com.facility.to.Profissional;
 
 import com.androidquery.AQuery;
@@ -66,8 +65,19 @@ public class ProfissionalListFragment extends Fragment {
 					//recupera lista de json
 					Profissional[] array = new Gson().fromJson(object, Profissional[].class);
 					profissionais = Arrays.asList(array);
-					//seta lista na tela
-					lstServicos.setAdapter(new CategoriaListAdapter());
+					if(profissionais.size() > 0){
+						//seta lista na tela
+						lstServicos.setAdapter(new CategoriaListAdapter());
+					}else{
+						List<String> list = new ArrayList<String>();
+						list.add("Nenhum profissional encontrado");
+						// seta lista na tela
+						ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+								getActivity(), android.R.layout.simple_list_item_1,
+								list);
+						lstServicos.setAdapter(adapter);
+					}
+					
 				}else{
 					Toast.makeText(container.getContext(), "Erro ao buscar profissionais", Toast.LENGTH_SHORT).show();
 				}
